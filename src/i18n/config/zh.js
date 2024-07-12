@@ -46,11 +46,15 @@ const zh = {
     aoiAlertSetting:'AOI预警信息维护',
     defectSetting:'缺陷信息维护',
     restStart:'停线维护',
+<<<<<<< HEAD
     kanban:'看板中心',
     calendars:'维保派工日历',
     abnormal:'异常维护表',
     Maintenance:'异常维护日历',
     parameterSettings:'录入参数设定'
+=======
+    kanban:'看板中心'
+>>>>>>> a2cea614f945bbd0bc0493b07d0c910a741032bb
   },
   huanYingShiYong: "欢迎使用",
   form: {

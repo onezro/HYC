@@ -633,6 +633,7 @@ export const constantRoutes = [
         name: "OEE",
         component: () => import("@/views/kanban/oee"),
         meta: { title: "OEE" }
+<<<<<<< HEAD
       },{
         path: "calendars",
         name: "calendars",
@@ -654,6 +655,9 @@ export const constantRoutes = [
         component: () => import("@/views/oee/parameterSettings"),
         meta: { title: "router.parameterSettings" }
       }
+=======
+      },
+>>>>>>> a2cea614f945bbd0bc0493b07d0c910a741032bb
       // {
       //   path: "smt_gpm",
       //   name: "smt_gpm",
