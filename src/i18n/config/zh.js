@@ -32,6 +32,7 @@ const zh = {
     smt_traceability:'SMT物料追溯',
     smt_throwing:'SMT抛料查询',
     smt_status:"SMT设备状态",
+    smt_iot:'SMT IOT',
     ticket_Quality:'工单品质数据',
     device_performance:'设备性能查询',
     realTime_orders:'工单实时查询',
@@ -46,15 +47,12 @@ const zh = {
     aoiAlertSetting:'AOI预警信息维护',
     defectSetting:'缺陷信息维护',
     restStart:'停线维护',
-<<<<<<< HEAD
     kanban:'看板中心',
     calendars:'维保派工日历',
     abnormal:'异常维护表',
     Maintenance:'异常维护日历',
     parameterSettings:'录入参数设定'
-=======
-    kanban:'看板中心'
->>>>>>> a2cea614f945bbd0bc0493b07d0c910a741032bb
+
   },
   huanYingShiYong: "欢迎使用",
   form: {

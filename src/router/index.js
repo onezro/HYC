@@ -209,12 +209,22 @@ export const constantRoutes = [
       },
     ],
   },
+  // {
+  //   path: "/projectLibrary",
+  //   component: Layout,
+  //   redirect: "/projectLibrary/projectList",
+  //   name: "projectLibrary",
+  //   meta: { title: "router.projectLibrary" },
+  //   children: [
+     
+  //   ],
+  // },
   {
-    path: "/projectLibrary",
+    path: "/basicCPK",
     component: Layout,
-    redirect: "/projectLibrary/projectList",
-    name: "projectLibrary",
-    meta: { title: "router.projectLibrary" },
+    redirect: "/basicCPK/sampleInform",
+    name: "BasicCPK",
+    meta: { title: "router.basicCPK" },
     children: [
       {
         path: "projectList",
@@ -228,15 +238,6 @@ export const constantRoutes = [
         component: () => import("@/views/projectLibrary/createCPK"),
         meta: { title: "router.createCPK" },
       },
-    ],
-  },
-  {
-    path: "/basicCPK",
-    component: Layout,
-    redirect: "/basicCPK/sampleInform",
-    name: "BasicCPK",
-    meta: { title: "router.basicCPK" },
-    children: [
       {
         path: "sampleInform",
         name: "SampleInform",
@@ -275,196 +276,6 @@ export const constantRoutes = [
       },
     ],
   },
-  // {
-  //   path: "/missInform",
-  //   component: Layout,
-  //   // redirect: "/system/role",
-  //   name: "missInform",
-  //   meta: { title: "router.masterControl" },
-  //   children:[
-  //     {
-  //       path: "makeupStops",
-  //       name: "makeupStops",
-  //       component: () => import("@/views/missInform/makeupStops"),
-  //       meta: { title: 'router.makeupStops'},
-  //     },
-  //   ]
-  // }
-  // {
-  //   path: "/smt",
-  //   component: Layout,
-  //   redirect: "/smtset",
-  //   meta: { title: "SMT维护与设定" },
-  //   children: [
-  //     {
-  //       path: "smdPro",
-  //       name: "smdPro",
-  //       component: () => import("@/views/smtset/smdPro"),
-  //       meta: { title: "贴片机机种" },
-  //     },
-  //     {
-  //       path: "mounter",
-  //       name: "Mounter",
-  //       component: () => import("@/views/smtset/mounter"),
-  //       meta: { title: "贴片机参数设定" },
-  //     },
-  //     {
-  //       path: "process",
-  //       name: "Process",
-  //       component: () => import("@/views/smtset/process"),
-  //       meta: { title: "工艺参数设定" },
-  //     },
-  //     {
-  //       path: "trackWidth",
-  //       name: "trackWidth",
-  //       component: () => import("@/views/smtset/trackWidth"),
-  //       meta: { title: "轨道宽度维护" },
-  //     },
-  //     {
-  //       path: "changeoverBasic",
-  //       name: "changeoverBasic",
-  //       component: () => import("@/views/smtset/changeoverBasic"),
-  //       meta: { title: "一键换线基础数据维护" },
-  //     },
-  //     {
-  //       path: "checkRecords",
-  //       name: "checkRecords",
-  //       component: () => import("@/views/smtset/checkRecords"),
-  //       meta: { title: "点检记录" },
-  //     },
-  //     {
-  //       path: "firstdata",
-  //       name: "firstdata",
-  //       component: () => import("@/views/smtset/firstdata"),
-  //       meta: { title: "首检基础数据" },
-  //     },
-  //     {
-  //       path: "inspection",
-  //       name: "inspection",
-  //       component: () => import("@/views/smtset/inspection"),
-  //       meta: { title: "巡检基础数据" },
-  //     },
-  //     {
-  //       path: "equipmentdata",
-  //       name: "equipment",
-  //       component: () => import("@/views/smtset/equipmentdata"),
-  //       meta: { title: "设备点检基础数据" },
-  //     },
-  //     {
-  //       path: "processdata",
-  //       name: "processdata",
-  //       component: () => import("@/views/smtset/processdata"),
-  //       meta: { title: "工艺点检基础数据" },
-  //     },
-
-  //     {
-  //       path: "radiumdata",
-  //       name: "radiumdata",
-  //       component: () => import("@/views/smtset/radiumdata"),
-  //       meta: { title: "镭雕基础数据维护" },
-  //     },
-  //     {
-  //       path: "msd",
-  //       name: "Msd",
-  //       component: () => import("@/views/smtset/msd"),
-  //       meta: { title: "MSD设定" },
-  //     },
-  //     {
-  //       path: "auxiliary",
-  //       name: "Auxiliary",
-  //       component: () => import("@/views/smtset/auxiliary"),
-  //       meta: { title: "辅机宽度设定" },
-  //     },
-  //     {
-  //       path: "substitute",
-  //       name: "Substitute",
-  //       component: () => import("@/views/smtset/substitute"),
-  //       meta: { title: "替代料设定" },
-  //     },
-  //     {
-  //       path: "feeder",
-  //       name: "Feeder",
-  //       component: () => import("@/views/smtset/feeder"),
-  //       meta: { title: "Feeder设定" },
-  //     },
-  //     {
-  //       path: "material",
-  //       name: "material",
-  //       component: () => import("@/views/smtset/material"),
-  //       meta: { title: "物料属性维护" },
-  //     },
-  //     {
-  //       path: "placemenEdito",
-  //       name: "placemenEdito",
-  //       component: () => import("@/views/smtset/placemenEdito"),
-  //       meta: { title: "贴片机程序维护" },
-  //     },
-  //     {
-  //       path: "configBarcodes",
-  //       name: "configBarcodes",
-  //       component: () => import("@/views/smtset/configBarcodes"),
-  //       meta: { title: "Barcode config维护" },
-  //     },
-  //   ],
-  // },
-  // {
-  //   path: "/smtapply",
-  //   component: Layout,
-  //   redirect: "/smtapply",
-  //   meta: { title: "SMT应用" },
-  //   children: [
-  //     {
-  //       path: "changeover",
-  //       name: "changeover",
-  //       component: () => import("@/views/smtapply/changeover"),
-  //       meta: { title: "一键换线" },
-  //     },
-  //     {
-  //       path: "programMerging",
-  //       name: "programMerging",
-  //       component: () => import("@/views/smtapply/programMerging"),
-  //       meta: { title: "程序合并" },
-  //     },
-  //     {
-  //       path: "maintenance",
-  //       name: "maintenance",
-  //       component: () => import("@/views/smtapply/maintenance"),
-  //       meta: { title: "维修" },
-  //     },
-  //     {
-  //       path: "visualInspection",
-  //       name: "visualInspection",
-  //       component: () => import("@/views/smtapply/visualInspection"),
-  //       meta: { title: "目检" },
-  //     },
-  //   ],
-  // },
-  // {
-  //   path: "/wmsInMain",
-  //   component: Layout,
-  //   redirect: "/wmsInMain",
-  //   meta: { title: "SMT半成品报工" },
-  //   children:[
-  //     {
-  //       path: "containerManage",
-  //       name: "containerManage",
-  //       component: () => import("@/views/wmsInMain/containerManage"),
-  //       meta: { title: "容器管理" },
-  //     },
-  //     {
-  //       path: "reportWork",
-  //       name: "reportWork",
-  //       component: () => import("@/views/wmsInMain/reportWork"),
-  //       meta: { title: "报工记录" },
-  //     },
-  //     {
-  //       path: "semiFinished",
-  //       name: "semiFinished",
-  //       component: () => import("@/views/wmsInMain/semiFinished"),
-  //       meta: { title: "半成品工单" },
-  //     },
-  //   ]
-  // },
   // {
   //   path: "/finishProduct",
   //   component: Layout,
@@ -590,6 +401,12 @@ export const constantRoutes = [
         meta: { title: "router.smt_throwing" },
       },
       {
+        path: "smt_iot ",
+        name: "smt_iot ",
+        component: () => import("@/views/report/smt_iot"),
+        meta: { title: "router.smt_iot" },
+      },
+      {
         path: "smt_status",
         name: "smt_status",
         component: () => import("@/views/report/smt_status"),
@@ -633,7 +450,6 @@ export const constantRoutes = [
         name: "OEE",
         component: () => import("@/views/kanban/oee"),
         meta: { title: "OEE" }
-<<<<<<< HEAD
       },{
         path: "calendars",
         name: "calendars",
@@ -655,9 +471,7 @@ export const constantRoutes = [
         component: () => import("@/views/oee/parameterSettings"),
         meta: { title: "router.parameterSettings" }
       }
-=======
-      },
->>>>>>> a2cea614f945bbd0bc0493b07d0c910a741032bb
+
       // {
       //   path: "smt_gpm",
       //   name: "smt_gpm",
