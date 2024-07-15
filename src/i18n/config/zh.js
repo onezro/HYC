@@ -131,7 +131,7 @@ const zh = {
     parameter: "参数",
     name:'名称',
     code:'编码',
-    cleanTime:'清洗时间',
+    cleanTime:'测试时间',
     //
     //漏站补站
     missQueries:'漏站查询',

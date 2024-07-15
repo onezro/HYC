@@ -209,179 +209,78 @@ export const constantRoutes = [
       },
     ],
   },
-  // {
-  //   path: "/projectLibrary",
-  //   component: Layout,
-  //   redirect: "/projectLibrary/projectList",
-  //   name: "projectLibrary",
-  //   meta: { title: "router.projectLibrary" },
-  //   children: [
-     
-  //   ],
-  // },
   {
-    path: "/basicCPK",
+    path: "/missInform",
     component: Layout,
-    redirect: "/basicCPK/sampleInform",
-    name: "BasicCPK",
-    meta: { title: "router.basicCPK" },
+    // redirect: "/system/role",
+    name: "MissInform",
+    meta: { title: "router.makeupStops" },
     children: [
       {
-        path: "projectList",
-        name: "projectList",
-        component: () => import("@/views/projectLibrary/projectList"),
-        meta: { title: "router.projectList" },
-      },
-      {
-        path: "createCPK",
-        name: "createCPK",
-        component: () => import("@/views/projectLibrary/createCPK"),
-        meta: { title: "router.createCPK" },
-      },
-      {
-        path: "sampleInform",
-        name: "SampleInform",
-        component: () => import("@/views/basicCPK/sampleInform"),
-        meta: { title: "router.sampleInform" },
-      },
-      {
-        path: "attributeInform",
-        name: "attributeInform",
-        component: () => import("@/views/basicCPK/attributeInform"),
-        meta: { title: "router.attributeInform" },
-      },
-      {
-        path: "spiAlertSetting",
-        name: "spiAlertSetting",
-        component: () => import("@/views/basicCPK/spiAlertSetting"),
-        meta: { title: "router.spiAlertSetting" },
-      },
-      {
-        path: "aoiAlertSetting",
-        name: "aoiAlertSetting",
-        component: () => import("@/views/basicCPK/aoiAlertSetting"),
-        meta: { title: "router.aoiAlertSetting" },
-      },
-      {
-        path: "defectSetting",
-        name: "defectSetting",
-        component: () => import("@/views/basicCPK/defectSetting"),
-        meta: { title: "router.defectSetting" },
-      },
-      {
-        path: "restStart",
-        name: "restStart",
-        component: () => import("@/views/basicCPK/restStart"),
-        meta: { title: "router.restStart" },
+        path: "makeupStops",
+        name: "makeupStops",
+        component: () => import("@/views/missInform/makeupStops"),
+        meta: { title: "router.makeupStops" },
       },
     ],
   },
   // {
-  //   path: "/finishProduct",
+  //   path: "/basicCPK",
   //   component: Layout,
-  //   redirect: "/finishProduct",
-  //   meta: { title: "成品入库" },
-  //   children:[
-  //     {
-  //       path: "inboundInspec",
-  //       name: "inboundInspec",
-  //       component: () => import("@/views/finishProduct/inboundInspec"),
-  //       meta: { title: "入库检验" },
-  //     },
-  //     {
-  //       path: "inboundRecord",
-  //       name: "inboundRecord",
-  //       component: () => import("@/views/finishProduct/inboundRecord"),
-  //       meta: { title: "包装记录" },
-  //     },
-  //     // {
-  //     //   path: "reportWork",
-  //     //   name: "reportWork",
-  //     //   component: () => import("@/views/wmsInMain/reportWork"),
-  //     //   meta: { title: "报工记录" },
-  //     // },
-  //     // {
-  //     //   path: "semiFinished",
-  //     //   name: "semiFinished",
-  //     //   component: () => import("@/views/wmsInMain/semiFinished"),
-  //     //   meta: { title: "半成品工单" },
-  //     // },
-  //   ]
-  // },
-
-  // {
-  //   path: "/fixture",
-  //   component: Layout,
-  //   redirect: "/fixture",
-  //   meta: { title: "治具房" },
-  //   children:[
-  //     {
-  //       path: "fixtureType",
-  //       name: "fixtureType",
-  //       component: () => import("@/views/fixture/fixtureType"),
-  //       meta: { title: "治具类型" },
-  //     },
-
-  //     {
-  //       path: "fixtureEntry",
-  //       name: "fixtureEntry",
-  //       component: () => import("@/views/fixture/fixtureEntry"),
-  //       meta: { title: "治具录入" },
-  //     },
-  //     {
-  //       path: "fixtureProduct",
-  //       name: "fixtureProduct",
-  //       component: () => import("@/views/fixture/fixtureProduct"),
-  //       meta: { title: "产品消耗" },
-  //     },
-  //     {
-  //       path: "fixtureIssue",
-  //       name: "fixtureIssue",
-  //       component: () => import("@/views/fixture/fixtureIssue"),
-  //       meta: { title: "fixtureIssue" },
-  //     },
-  //   ]
-  // },
-  // {
-  //   path: "/wms",
-  //   component: Layout,
-  //   redirect: "/wms",
+  //   redirect: "/basicCPK/sampleInform",
+  //   name: "BasicCPK",
+  //   meta: { title: "router.basicCPK" },
   //   children: [
   //     {
-  //       path: "moisture",
-  //       name: "moisture",
-  //       component: () => import("@/views/wms/moisture"),
-  //       meta: { title: "湿敏元器件" },
+  //       path: "projectList",
+  //       name: "projectList",
+  //       component: () => import("@/views/projectLibrary/projectList"),
+  //       meta: { title: "router.projectList" },
+  //     },
+  //     {
+  //       path: "createCPK",
+  //       name: "createCPK",
+  //       component: () => import("@/views/projectLibrary/createCPK"),
+  //       meta: { title: "router.createCPK" },
+  //     },
+  //     {
+  //       path: "sampleInform",
+  //       name: "SampleInform",
+  //       component: () => import("@/views/basicCPK/sampleInform"),
+  //       meta: { title: "router.sampleInform" },
+  //     },
+  //     {
+  //       path: "attributeInform",
+  //       name: "attributeInform",
+  //       component: () => import("@/views/basicCPK/attributeInform"),
+  //       meta: { title: "router.attributeInform" },
+  //     },
+  //     {
+  //       path: "spiAlertSetting",
+  //       name: "spiAlertSetting",
+  //       component: () => import("@/views/basicCPK/spiAlertSetting"),
+  //       meta: { title: "router.spiAlertSetting" },
+  //     },
+  //     {
+  //       path: "aoiAlertSetting",
+  //       name: "aoiAlertSetting",
+  //       component: () => import("@/views/basicCPK/aoiAlertSetting"),
+  //       meta: { title: "router.aoiAlertSetting" },
+  //     },
+  //     {
+  //       path: "defectSetting",
+  //       name: "defectSetting",
+  //       component: () => import("@/views/basicCPK/defectSetting"),
+  //       meta: { title: "router.defectSetting" },
+  //     },
+  //     {
+  //       path: "restStart",
+  //       name: "restStart",
+  //       component: () => import("@/views/basicCPK/restStart"),
+  //       meta: { title: "router.restStart" },
   //     },
   //   ],
   // },
-  // {
-  //   path: "/assemble",
-  //   component: Layout,
-  //   name:'assemble',
-  //   children: [
-  //     {
-  //       path: "assembleIssue",
-  //       name: "assembleIssue",
-  //       component: () => import("@/views/assemble/assembleIssue"),
-  //       meta: { title: "组装配置" },
-  //     },
-  //   ],
-  // },
-  // {
-  //   path: "/assembleapply",
-  //   component: Layout,
-  //   redirect: "/assembleapply",
-  //   children: [
-  //     {
-  //       path: "assembleapply",
-  //       name: "Assembleapply",
-  //       component: () => import("@/views/assembleapply"),
-  //       meta: { title: "组装应用" },
-  //     },
-  //   ],
-  // },
-
   {
     path: "/report",
     component: Layout,

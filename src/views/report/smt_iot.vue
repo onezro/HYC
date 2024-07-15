@@ -1,5 +1,5 @@
 <template>
-  <div class="iot">
+  <div class="traceability" id="fullDiv1">
     <div v-loading="iframeloading"></div>
     <iframe
       class="iframe"
@@ -13,12 +13,12 @@
 <script>
 export default {
   data() {
-    return { 
+    return {
       iframeloading: true,
       reportUrl: "http://10.30.129.4:8812/#/gateway/HYC",
     };
   },
-   mounted() {
+  mounted() {
     const iframe = document.querySelector("#ifra");
     // 处理兼容行问题
     if (iframe.attachEvent) {
