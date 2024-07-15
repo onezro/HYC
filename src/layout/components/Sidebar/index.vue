@@ -35,7 +35,7 @@ export default {
   computed: {
     ...mapGetters(["sidebar"]),
     routes() {
-      console.log(this.$router.options.routes);
+      // console.log(this.$router.options.routes);
       return this.$router.options.routes;
     },
     activeMenu() {

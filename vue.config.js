@@ -44,6 +44,15 @@ module.exports = {
           '^/mjs': ''
         }
       },
+      '/cpk': {
+        // 需要访问的地址
+        target: 'http://192.168.10.27:8015',
+        // 开启代理
+        changeOrigin: true,
+        pathRewrite: {
+          '^/cpk': ''
+        }
+      },
    
     }
 
