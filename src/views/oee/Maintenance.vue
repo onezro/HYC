@@ -67,9 +67,10 @@ export default {
         ],
         displayEventTime: false,
         headerToolbar: {
-          left: "test prev,next allDay,AM,PM",
+          left: "test prev,next",
           center: "title",
-          right: "lineOne lineTwo lineThree",
+          right: "allDay,AM,PM",
+          // lineOne lineTwo lineThree
           // ,timeGridDay,listWeek
         },
         allDaySlot: false, //allday 整天的日程是否显示
@@ -814,7 +815,7 @@ export default {
               </el-option>
             </el-select>
           </el-form-item>
-          <el-form-item label="设备">
+          <!-- <el-form-item label="设备">
             <el-select
               v-model="equipment"
               placeholder="请选择"
@@ -857,7 +858,7 @@ export default {
               >
               </el-option>
             </el-select>
-          </el-form-item>
+          </el-form-item> -->
         </el-form>
         <h2 class="el-subtitle">已维护异常数据</h2>
         <el-form :model="showForm" label-width="auto">

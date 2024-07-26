@@ -70,9 +70,11 @@ export default {
         ],
         displayEventTime: false,
         headerToolbar: {
-          left: "prev,next today addEvent timeChoice allDay",
+          left: "addEvent timeChoice allDay",
           center: "title",
-          right: "lineOne lineTwo lineThree",
+          right: "btnDateShow",
+          // prev,next today
+          // lineOne lineTwo lineThree
           // ,timeGridDay,listWeek
         },
         customButtons: {
@@ -119,6 +121,15 @@ export default {
               this.calendarOptions.slotDuration = "01:00:00";
             },
           },
+          btnDateShow: {
+            text: "日期选择",
+            click: (e) => {
+              this.btnDateStyle.top = e.target.getBoundingClientRect().top;
+              this.btnDateStyle.left = e.target.getBoundingClientRect().left;
+              this.$refs.datePicker.handleFocus();
+              // this.$refs.btnDate.$el.click();
+            }
+          }
         },
         initialView: "timeGridWeek",
         // initialEvents: [INITIAL_EVENTS], // alternatively, use the `events` setting to fetch from a feed
@@ -248,11 +259,16 @@ export default {
         left: 0,
       },
       durtimeList: durationChoice(),
-      wrongTime:{
-        start:'',
-        end:'',
-        mcName:''
-      }
+      wrongTime: {
+        start: "",
+        end: "",
+        mcName: "",
+      },
+      btnDate: "",
+      btnDateStyle: {
+        top: 0,
+        left: 0,
+      },
     };
   },
   watch: {
@@ -326,10 +342,10 @@ export default {
     //   }
     // },
     eventColor(boolen1, boolen2, code) {
-      if (code === '夜班') {
-        return '#00AC6A'
-      }else if (code === '白班'){
-        return '#00d382'
+      if (code === "夜班") {
+        return "#00AC6A";
+      } else if (code === "白班") {
+        return "#00d382";
       }
       // console.log(code);
       if (boolen1 && !boolen2) {
@@ -389,10 +405,10 @@ export default {
       } else if (data.state === "onGoing") {
         this.isGoingEventShow = true;
         this.wrongTime = {
-          start:data.StartTime,
-          end:data.EndTime,
-          mcName:data.mcName
-        }
+          start: data.StartTime,
+          end: data.EndTime,
+          mcName: data.mcName,
+        };
       } else if (data.state === "complete") {
         this.showForm = {
           serialNumber: data.serialNumber,
@@ -477,13 +493,13 @@ export default {
       })
         .then((res) => {
           if (res.data.Status === "OK") {
-          let arr1 = res.data.DataList.sort(function (a, b) {
-            let obj1 = a["StartTime"];
-            let obj2 = b["StartTime"];
-            const val1 = Math.floor(new Date(obj1).getTime() / 1000);
-            const val2 = Math.floor(new Date(obj2).getTime() / 1000);
-            return val1 - val2;
-          });
+            let arr1 = res.data.DataList.sort(function (a, b) {
+              let obj1 = a["StartTime"];
+              let obj2 = b["StartTime"];
+              const val1 = Math.floor(new Date(obj1).getTime() / 1000);
+              const val2 = Math.floor(new Date(obj2).getTime() / 1000);
+              return val1 - val2;
+            });
             arr1.forEach((item) => {
               this.completedIndex = this.completedIndex + 0.1;
               if (item.LineNumber === "Line1") {
@@ -1332,8 +1348,11 @@ export default {
         end: getEndTime(item.StartTime, item.Duration, true),
         title: item.Name,
         allDay: false,
-        color: this.eventColor(item.IsWorking === "Y", item.IsPlanStop === "Y",
-          obj.LevelCode),
+        color: this.eventColor(
+          item.IsWorking === "Y",
+          item.IsPlanStop === "Y",
+          obj.LevelCode
+        ),
         textColor: this.eventText(
           item.IsWorking === "Y",
           item.IsPlanStop === "Y"
@@ -1457,8 +1476,8 @@ export default {
         endTime: delectT(item.EndTime),
         mcId: item.McID,
         mcName: item.McName,
-        StartTime:item.StartTime,
-        EndTime:item.EndTime
+        StartTime: item.StartTime,
+        EndTime: item.EndTime,
       });
     },
     handleInput(value) {
@@ -1509,6 +1528,9 @@ export default {
       this.calendarOptions.views.timeGridWeek.slotLabelInterval = "00:02:00";
       this.calendarOptions.slotDuration = "00:02:00";
     },
+    btnDateChange(date) {
+      this.$refs.calendars.getApi().gotoDate(date);
+    }
   },
 };
 </script>
@@ -1543,11 +1565,22 @@ export default {
             <div>已维修</div>
             <div class="yellow"></div>
           </div>
-          <div class="color">
+          <div ref="btnDate" class="btn-date" :style="{ top: `${btnDateStyle.top}px`, left: `${btnDateStyle.left}px` }">
+            <el-date-picker
+              ref="datePicker"
+              v-model="btnDate"
+              type="date"
+              value-format="yyyy-MM-dd"
+              placeholder="选择日期"
+              @change="btnDateChange"
+            >
+            </el-date-picker>
+          </div>
+          <!-- <div class="color">
             <div v-show="line === 0">当前工作线:一号线</div>
             <div v-show="line === 1">当前工作线:二号线</div>
             <div v-show="line === 2">当前工作线:三号线</div>
-          </div>
+          </div> -->
         </div>
       </div>
       <FullCalendar
@@ -1650,9 +1683,11 @@ export default {
               <el-select v-model="lineInput" placeholder="工作线">
                 <el-option
                   v-for="item in [
-                    { value: 'Line1', name: 'Line1' },
-                    { value: 'Line2', name: 'Line2' },
-                    { value: 'Line3', name: 'Line3' },
+                    { value: 'S01', name: 'S01' },
+                    { value: 'S02', name: 'S02' },
+                    { value: 'S03', name: 'S03' },
+                    { value: 'S04', name: 'S04' },
+                    { value: 'S05', name: 'S05' },
                     { value: 'All', name: 'All' },
                   ]"
                   :key="item.value"
@@ -2081,5 +2116,12 @@ export default {
 ::v-deep .el-input-number__increase,
 ::v-deep .el-input-number__decrease {
   display: none;
+}
+
+.btn-date {
+  width: 0px;
+  height: 0px;
+  overflow: hidden;
+  position: fixed;
 }
 </style>
