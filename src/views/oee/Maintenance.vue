@@ -67,10 +67,9 @@ export default {
         ],
         displayEventTime: false,
         headerToolbar: {
-          left: "test prev,next",
+          left: "test prev,next allDay,AM,PM",
           center: "title",
-          right: "allDay,AM,PM",
-          // lineOne lineTwo lineThree
+          right: "lineOne lineTwo lineThree",
           // ,timeGridDay,listWeek
         },
         allDaySlot: false, //allday 整天的日程是否显示
@@ -394,7 +393,7 @@ export default {
     ...mapState(["dashboardHeight"]),
   },
   created() {
-    this.getData();
+    // this.getData();
   },
   mounted() {
     console.log(VUE_APP_BASE_API);
@@ -403,7 +402,7 @@ export default {
   },
   methods: {
     async getData() {
-      // this.startLoading();
+      this.startLoading();
       this.workIndex = 1;
       this.maintenanceIndex = 2000001;
       this.completedIndex = 1000001;
@@ -572,6 +571,14 @@ export default {
       }
     },
     handleUpdate() {
+      if (this.form.closedTime === '' || this.form.errorType === '' || 
+      this.form.errorDsc === '') {
+          this.$message({
+            message: "请输完整信息",
+            type: "warning",
+          });
+        return;
+      }
       XY_OEE_LineErrorUpdate(this.form)
         .then((res) => {
           if (res.data.Status === "OK") {
@@ -815,7 +822,7 @@ export default {
               </el-option>
             </el-select>
           </el-form-item>
-          <!-- <el-form-item label="设备">
+          <el-form-item label="设备">
             <el-select
               v-model="equipment"
               placeholder="请选择"
@@ -858,7 +865,7 @@ export default {
               >
               </el-option>
             </el-select>
-          </el-form-item> -->
+          </el-form-item>
         </el-form>
         <h2 class="el-subtitle">已维护异常数据</h2>
         <el-form :model="showForm" label-width="auto">
