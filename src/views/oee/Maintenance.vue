@@ -393,7 +393,7 @@ export default {
     ...mapState(["dashboardHeight"]),
   },
   created() {
-    this.getData();
+    // this.getData();
   },
   mounted() {
     console.log(VUE_APP_BASE_API);
@@ -402,7 +402,7 @@ export default {
   },
   methods: {
     async getData() {
-      // this.startLoading();
+      this.startLoading();
       this.workIndex = 1;
       this.maintenanceIndex = 2000001;
       this.completedIndex = 1000001;
@@ -571,6 +571,14 @@ export default {
       }
     },
     handleUpdate() {
+      if (this.form.closedTime === '' || this.form.errorType === '' || 
+      this.form.errorDsc === '') {
+          this.$message({
+            message: "请输完整信息",
+            type: "warning",
+          });
+        return;
+      }
       XY_OEE_LineErrorUpdate(this.form)
         .then((res) => {
           if (res.data.Status === "OK") {

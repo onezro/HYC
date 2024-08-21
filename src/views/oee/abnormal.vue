@@ -3,8 +3,8 @@
     <div class="all-wrong" ref="wrong" :style="{ height: `${dashboardHeight}px` }">
       <div class="title" ref="wrongTitle">待处理产线异常</div>
       <el-table
-        :style="{ height: `${allHeight}px` }"
-        :max-height="allHeight"
+        :height="tableHeight"
+        :max-height="tableHeight"
         :data="
           allList.slice((currentPage - 1) * pageSize, currentPage * pageSize)
         "
@@ -53,8 +53,8 @@
         </div>
       </div>
       <el-table
-        :style="{ height: `${allHeight}px` }"
-        :max-height="allHeight"
+        :height="tableHeight"
+        :max-height="tableHeight"
         :data="
           todayList.slice(
             (todayCurrentPage - 1) * todayPageSize,
@@ -165,6 +165,7 @@ export default {
       allHeight: 0,
       allList: [],
       todayList: [],
+      tableHeight: 0,
       maintenance: false,
       form: {
         operationType: "U",
@@ -197,12 +198,14 @@ export default {
     ...mapState(["dashboardHeight"]),
   },
   created() {
-    this.getData();
+    // this.getData();
   },
   mounted() {
     window.addEventListener("resize", this.getWrongHeight, false);
+    window.addEventListener("resize", this.getScreenHeight, false);
     this.$nextTick(() => {
       this.getWrongHeight();
+      this.getScreenHeight();
       console.log(this.$refs.test.clientHeight);
     });
   },
@@ -352,6 +355,13 @@ export default {
           });
         });
     },
+    getScreenHeight() {
+      this.$nextTick(() => {
+        this.tableHeight = (window.innerHeight - 350)/2;
+        console.log(this.tableHeight);
+        // this.tableHeight1 =
+      });
+    }
   },
 };
 </script>

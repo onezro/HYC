@@ -32,7 +32,6 @@ const zh = {
     smt_traceability:'SMT物料追溯',
     smt_throwing:'SMT抛料查询',
     smt_status:"SMT设备状态",
-    smt_iot:'SMT IOT',
     ticket_Quality:'工单品质数据',
     device_performance:'设备性能查询',
     realTime_orders:'工单实时查询',
@@ -52,7 +51,6 @@ const zh = {
     abnormal:'异常维护表',
     Maintenance:'异常维护日历',
     parameterSettings:'录入参数设定'
-
   },
   huanYingShiYong: "欢迎使用",
   form: {
@@ -131,7 +129,7 @@ const zh = {
     parameter: "参数",
     name:'名称',
     code:'编码',
-    cleanTime:'测试时间',
+    cleanTime:'清洗时间',
     //
     //漏站补站
     missQueries:'漏站查询',
