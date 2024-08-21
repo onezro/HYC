@@ -245,10 +245,10 @@
         </el-form-item>
         <el-form-item
           :label="$t('tableText.expirationDate')"
-          prop="SampleEffective"
+          prop="sampleEffective"
         >
           <el-date-picker
-            v-model="addForm.SampleEffective"
+            v-model="addForm.sampleEffective"
             value-format="yyyy-MM-ddTHH:mm:ss"
             format="yyyy-MM-dd HH:mm:ss"
             type="datetime"
@@ -468,7 +468,7 @@ export default {
             trigger: "change",
           },
         ],
-        SampleEffective: [
+        sampleEffective: [
           {
             required: true,
             message: this.$t("rules.error"),
