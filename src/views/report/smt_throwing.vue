@@ -15,7 +15,7 @@ export default {
   data() {
     return {
       iframeloading: true,
-      reportUrl: "http://192.168.10.27/ValorMSS/shopfloor/FeederErrors",
+      reportUrl: "http://192.168.10.155/ValorMSS/shopfloor/FeederErrors",
     };
   },
   mounted() {

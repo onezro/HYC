@@ -73,19 +73,25 @@
       border
       stripe
     >
-      <el-table-column type="index" align="center"></el-table-column>
+      <el-table-column
+        type="index"
+        align="center"
+       
+         fixed="left"
+      ></el-table-column>
       <af-table-column
         align="center"
         prop="productID"
         :label="$t('form.productNum')"
       >
       </af-table-column>
-      <af-table-column
+      <el-table-column
+        min-width="160px"
         align="center"
         prop="ProductName"
         :label="$t('form.productList') + $t('tableText.name')"
       >
-      </af-table-column>
+      </el-table-column>
       <af-table-column
         align="center"
         prop="SampleNumber"
@@ -99,6 +105,7 @@
       >
       </el-table-column>
       <el-table-column
+        min-width="120px"
         align="center"
         prop="SamplePosition"
         :label="$t('tableText.stations')"
@@ -478,12 +485,17 @@ export default {
       };
     },
   },
+  beforeMount() {
+    this.getScreenHeight();
+  },
   mounted() {
-    this.$nextTick(() => {
-      this.tableHeight = window.innerHeight - 225;
-    });
+    window.addEventListener("resize", this.getScreenHeight);
     this.getData();
     this.getBicData();
+  },
+
+  beforeDestroy() {
+    window.removeEventListener("resize", this.getScreenHeight);
   },
   methods: {
     getBicData() {
@@ -536,10 +548,10 @@ export default {
       UpdateGoldSample(this.editForm).then((res) => {
         if (res.ResultCode == 200) {
           this.dialogEdVisible = false;
-            this.$message({
-                type: "success",
-                message: this.$t("message.success"),
-              });
+          this.$message({
+            type: "success",
+            message: this.$t("message.success"),
+          });
         }
         this.getData();
       });
@@ -584,13 +596,19 @@ export default {
       // console.log(`当前页: ${val}`);
       this.currentPage = val;
     },
+      getScreenHeight() {
+      this.$nextTick(() => {
+        this.tableHeight = window.innerHeight - 200;
+        //后面的50：根据需求空出的高度，自行调整
+      });
+    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
 .plate {
-  padding: 20px;
+  padding: 10px;
   .box {
     display: flex;
     justify-content: space-between;

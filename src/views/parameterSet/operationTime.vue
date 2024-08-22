@@ -14,15 +14,15 @@
             clearable
             v-model="getDataText.productID"
             class="input-with-select"
-              @change="getData"
+            @change="getData"
           >
           </el-input>
-             <el-button
-          @click="getData"
-          size="small"
-          slot="append"
-          icon="el-icon-search"
-        ></el-button>
+          <el-button
+            @click="getData"
+            size="small"
+            slot="append"
+            icon="el-icon-search"
+          ></el-button>
           <!-- <el-select
             v-model="getDataText.productName"
             filterable
@@ -78,7 +78,11 @@
         border
         stripe
       >
-        <el-table-column type="index" align="center"></el-table-column>
+        <el-table-column
+          type="index"
+          align="center"
+          fixed="left"
+        ></el-table-column>
         <af-table-column
           align="center"
           prop="ProductID"
@@ -522,12 +526,11 @@ export default {
           this.form.operationType = type;
           ProductRouting(this.form).then((res) => {
             if ((res.ResultCode = 200)) {
-          
               this.getData();
-                this.$message({
-            type: "success",
-            message: this.$t("message.success"),
-          });
+              this.$message({
+                type: "success",
+                message: this.$t("message.success"),
+              });
               this.dialogVisible = false;
               this.dialogEdit = false;
             }
@@ -541,14 +544,13 @@ export default {
     onEditSubmit() {
       ProductRouting(this.editForm).then((res) => {
         if ((res.ResultCode = 200)) {
-           this.getData();
+          this.getData();
           this.dialogVisible = false;
           this.dialogEdit = false;
           this.$message({
             type: "success",
             message: this.$t("message.success"),
           });
-         
         }
       });
     },
@@ -558,13 +560,13 @@ export default {
       this.editForm = {
         compareRules: row.CompareRules,
         cycleTime: row.CycleTime,
-        postOperationID:  row.PostOperationID,
-        postOperationName:row.PostOperationName,
+        postOperationID: row.PostOperationID,
+        postOperationName: row.PostOperationName,
         preOperationID: row.PreOperationID,
         preOperationName: row.PreOperationName,
-        productID:row. ProductID,
-        productName:row.ProductName,
-        updateTime:row.UpdateTime,
+        productID: row.ProductID,
+        productName: row.ProductName,
+        updateTime: row.UpdateTime,
         userName: row.UserName,
         operationType: "U",
       };

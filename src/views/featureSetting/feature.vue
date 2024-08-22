@@ -174,6 +174,7 @@
       :title="$t('form.add')"
       :visible.sync="dialogEdVisible"
       width="50%"
+      :center="true"
       @close="editCancel()"
     >
       <el-form
@@ -569,7 +570,7 @@ export default {
     },
     getScreenHeight() {
       this.$nextTick(() => {
-        this.tableHeight = window.innerHeight - 275;
+        this.tableHeight = window.innerHeight - 220;
 
         //后面的50：根据需求空出的高度，自行调整
       });
@@ -613,4 +614,20 @@ export default {
 .feature {
   padding: 10px;
 }
+::v-deep .el-dialog{
+       display: flex;
+       flex-direction: column;
+       margin:0 !important;
+       position:absolute;
+       top:50%;
+       left:50%;
+       transform:translate(-50%,-50%);
+       max-height:calc(100% - 30px);
+       max-width:calc(100% - 30px);
+   }
+  ::v-deep  .el-dialog .el-dialog__body{
+       flex:1;
+       overflow: auto;
+   }
+
 </style>

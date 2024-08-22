@@ -50,7 +50,7 @@
         "
         id="Table1"
         :height="tableHeight"
-        size="mini"
+       size="mini"
         :header-cell-style="heardStyle"
         border
         stripe
@@ -138,7 +138,10 @@ export default {
       }
     },
   },
-
+  created() {
+    // console.log(this.$route.query);
+    this.getDataText.seiralNumber = this.$route.query.SerialNumber; // 使用查询参数时使用
+  },
   beforeMount() {
     this.getScreenHeight();
   },

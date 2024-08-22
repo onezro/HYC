@@ -27,6 +27,7 @@ const loading = {
   },
 };
 
+
 // 基地址
 const service = axios.create({
   baseURL: "/all",
@@ -34,7 +35,7 @@ const service = axios.create({
   timeout: 5000 * 2,
 });
 let source = axios.CancelToken.source();
-// console.log(source);
+console.log(source);
 service.interceptors.request.use(
   (config) => {
     config.cancelToken = source.token; // 取消请求

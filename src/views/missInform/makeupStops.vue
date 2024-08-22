@@ -243,6 +243,9 @@ export default {
         });
       });
     },
+     toQuatrace(SerialNumber) {
+      this.$router.push({ path: "/report/quatrace", query: { SerialNumber } });
+    },
     entryData() {
       this.$refs.form.validate((valid) => {
         if (valid) {
@@ -250,7 +253,7 @@ export default {
           AddMissSN(this.form).then((res) => {
             this.$message({
               type: "success",
-              message: "操作成功!",
+              message: "补站成功!",
             });
           });
         } else {
@@ -258,26 +261,6 @@ export default {
           return false;
         }
       });
-      //   this.startLoading();
-      //   XY_Prod_AddMissSN({
-      //     ...this.addForm,
-      //     startTime: missTime(this.addForm.startTime),
-      //   })
-      //     .then(({ data }) => {
-      //       if (data.Status === "OK") {
-      //         this.$message({
-      //           message: "数据录入成功",
-      //           type: "success",
-      //         });
-      //       } else {
-      //         this.$message(data.Message);
-      //       }
-      //       this.endLoading();
-      //     })
-      //     .catch((res) => {
-      //       this.$message(res);
-      //       this.endLoading();
-      //     });
     },
   },
 };
@@ -285,7 +268,7 @@ export default {
 
 <style lang="scss" scoped>
 .smtinstpro {
-  padding: 20px;
+  padding:0 10px;
   // .form{
   //    display: flex;
   //     justify-content: flex-end;
