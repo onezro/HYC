@@ -3,7 +3,7 @@ import FullCalendar from "@fullcalendar/vue";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
-import { XY_OEE_Calendar, XY_OEE_LevelCode, XY_OEE_LevelType } from "@/api/all";
+import { XY_OEE_Calendar, XY_OEE_LevelCode, XY_OEE_LevelType, XY_OEE_LevelCodeControl } from "@/api/all";
 import {
   getStartTime,
   getEndTime,
@@ -58,28 +58,36 @@ export default {
         headerToolbar: {
           left: "prev,next today",
           center: "title",
-          right: "lineOne,lineTwo,lineThree",
+          right: "choiceLine",
           // ,timeGridDay,listWeek
         },
         customButtons: {
-          lineOne: {
-            text: "Line1",
-            click: () => {
-              this.line = 0;
+          choiceLine: {
+            text: "选择线体",
+            click: (e) => {
+              this.lineButton.top = e.target.getBoundingClientRect().top;
+              this.lineButton.left = e.target.getBoundingClientRect().left;
+              this.$refs.timeChoice.$el.click();
             },
           },
-          lineTwo: {
-            text: "Line2",
-            click: () => {
-              this.line = 1;
-            },
-          },
-          lineThree: {
-            text: "Line3",
-            click: () => {
-              this.line = 2;
-            },
-          },
+          // lineOne: {
+          //   text: "Line1",
+          //   click: () => {
+          //     this.line = 0;
+          //   },
+          // },
+          // lineTwo: {
+          //   text: "Line2",
+          //   click: () => {
+          //     this.line = 1;
+          //   },
+          // },
+          // lineThree: {
+          //   text: "Line3",
+          //   click: () => {
+          //     this.line = 2;
+          //   },
+          // }
         },
         initialView: "timeGridWeek",
         allDaySlot: false, //allday 整天的日程是否显示
@@ -166,7 +174,27 @@ export default {
       dateInputWrite: false,
       timeInputWrite: false,
       eventOrder: 2,
-      lineHistory:0
+      lineHistory:0,
+      lineButton:{
+        top:0,
+        left:0
+      },
+      lineList:[{
+        item:0,
+        label:'S01'
+      },{
+        item:1,
+        label:'S02'
+      },{
+        item:2,
+        label:'S03'
+      },{
+        item:3,
+        label:'S04'
+      },{
+        item:4,
+        label:'S05'
+      },]
     };
   },
   watch: {
@@ -201,7 +229,7 @@ export default {
   },
   created() {
     // this.getdata(0);
-    // this.getLevelCode();
+    this.getLevelCode();
   },
   // mounted() {
   //   this.getdata();
@@ -342,10 +370,13 @@ export default {
     //初始化获取数据
     getLevelCode() {
       this.startLoading();
-      XY_OEE_LevelCode({
+      XY_OEE_LevelCodeControl({
         operationType: "QA",
       })
         .then((res) => {
+          if (!res) {
+            return;
+          }
           if (res.data.Status === "OK") {
             this.levelCodeData = res.data.DataList;
           } else {
@@ -364,7 +395,7 @@ export default {
           //   message: `OEE参数获取失败`,
           // });
           this.endLoading();
-          this.getLevelCode();
+          // this.getLevelCode();
         });
     },
     addData() {
@@ -680,6 +711,9 @@ export default {
         ...obj,
       });
     },
+    durtimeChange(value) {
+      this.line = value;
+    }
   },
 };
 </script>
@@ -715,9 +749,11 @@ export default {
             <div class="yellow"></div>
           </div>
           <div class="color">
-            <div v-show="line === 0">当前工作线:一号线</div>
-            <div v-show="line === 1">当前工作线:二号线</div>
-            <div v-show="line === 2">当前工作线:三号线</div>
+            <div v-show="line === 0">当前工作线:S01</div>
+            <div v-show="line === 1">当前工作线:S02</div>
+            <div v-show="line === 2">当前工作线:S03</div>
+            <div v-show="line === 3">当前工作线:S04</div>
+            <div v-show="line === 4">当前工作线:S05</div>
           </div>
         </div>
       </div>
@@ -821,9 +857,11 @@ export default {
               <el-select v-model="lineChange" placeholder="工作线">
                 <el-option
                   v-for="item in [
-                    { value: 'Line1', name: 'Line1' },
-                    { value: 'Line2', name: 'Line2' },
-                    { value: 'Line3', name: 'Line3' },
+                    { value: 'S01', name: 'S01' },
+                    { value: 'S02', name: 'S02' },
+                    { value: 'S03', name: 'S03' },
+                    { value: 'S04', name: 'S04' },
+                    { value: 'S05', name: 'S05' },
                     { value: 'All', name: 'All' },
                   ]"
                   :key="item.value"
@@ -965,9 +1003,11 @@ export default {
               <el-select v-model="lineInput" placeholder="工作线">
                 <el-option
                   v-for="item in [
-                    { value: 'Line1', name: 'Line1' },
-                    { value: 'Line2', name: 'Line2' },
-                    { value: 'Line3', name: 'Line3' },
+                    { value: 'S01', name: 'S01' },
+                    { value: 'S02', name: 'S02' },
+                    { value: 'S03', name: 'S03' },
+                    { value: 'S04', name: 'S04' },
+                    { value: 'S05', name: 'S05' },
                     { value: 'All', name: 'All' },
                   ]"
                   :key="item.value"
@@ -1017,6 +1057,25 @@ export default {
         </el-button>
       </div>
     </el-dialog>
+    <div
+      class="timechoice"
+    :style="{ top: `${lineButton.top}px`, left: `${lineButton.left}px` }"
+    >
+      <el-select
+        v-model="line"
+        @change="durtimeChange"
+        ref="timeChoice"
+        style="width: 0px; height: 0px; overflow: hidden"
+      >
+        <el-option
+          v-for="item in lineList"
+          :key="item.item"
+          :label="item.label"
+          :value="item.item"
+        >
+        </el-option>
+      </el-select>
+    </div>
   </div>
 </template>
 
@@ -1149,5 +1208,12 @@ export default {
 
 .fc-day-number {
   font-size: 20px;
+}
+
+.timechoice {
+  width: 0px;
+  height: 0px;
+  // overflow: hidden;
+  position: fixed;
 }
 </style>

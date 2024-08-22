@@ -556,3 +556,12 @@ export function DeletSteelMesh(data) {
     data,
   });
 }
+
+//OEE 
+export function XY_OEE_LevelCodeControl(data) {
+  return request({
+    url: "/XingYuAPI/XY_OEE_LevelCodeControl",
+    method: "post",
+    data,
+  });
+}

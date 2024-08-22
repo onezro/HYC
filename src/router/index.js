@@ -638,17 +638,20 @@ export const constantRoutes = [
         name: "calendars",
         component: () => import("@/views/oee/calendars"),
         meta: { title: "router.calendars" }
-      },{
-        path: "abnormal",
-        name: "abnormal",
-        component: () => import("@/views/oee/abnormal"),
-        meta: { title: "router.abnormal" }
-      },{
-        path: "Maintenance",
-        name: "Maintenance",
-        component: () => import("@/views/oee/Maintenance"),
-        meta: { title: "router.Maintenance" }
-      },{
+      },
+      // {
+      //   path: "abnormal",
+      //   name: "abnormal",
+      //   component: () => import("@/views/oee/abnormal"),
+      //   meta: { title: "router.abnormal" }
+      // },
+      // {
+      //   path: "Maintenance",
+      //   name: "Maintenance",
+      //   component: () => import("@/views/oee/Maintenance"),
+      //   meta: { title: "router.Maintenance" }
+      // },
+      {
         path: "parameterSettings",
         name: "parameterSettings",
         component: () => import("@/views/oee/parameterSettings"),
