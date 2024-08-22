@@ -1,51 +1,59 @@
 <template>
   <div class="parameterSetting">
-    <el-card class="box-card">
-      <div slot="header" class="clearfix">
-        <el-input
-          placeholder="OEE参数"
-          v-model="searchiInput"
-          class="input-with-select"
-          style="width: 300px; margin-right: 20px"
+    <el-card class="box-card" shadow="always" :body-style="{ padding: '10px' }">
+      <div class="header-css">
+        <el-button type="primary" @click="dialogFormVisible = true"
+          >{{
+          $t("form.add")
+        }}</el-button
         >
-          <el-button
-            slot="append"
-            icon="el-icon-search"
-            @click="searchData()"
-          ></el-button>
-        </el-input>
-        <el-button @click="dataInitialization">查看全部</el-button>
+        <div>
+          <el-input
+            :placeholder="'OEE'+$t('tableText.parameter')"
+            v-model="searchiInput"
+            class="input-with-select"
+            style="width: 300px; margin-right: 20px"
+          >
+            <el-button
+              slot="append"
+              icon="el-icon-search"
+              @click="searchData()"
+            ></el-button>
+          </el-input>
+          <el-button @click="dataInitialization">查看全部</el-button>
+        </div>
       </div>
-      <el-button type="primary" @click="dialogFormVisible = true"
-        >增加</el-button
-      >
+
       <el-table
+        :height="tableHeight"
+        border
+        stripe
         :data="
           tableData.slice((currentPage - 1) * pageSize, currentPage * pageSize)
         "
       >
-        <el-table-column prop="LevelType" label="OEE类型">
+        <el-table-column prop="LevelType" :label="'OEE'+$t('tableText.type')">
           <template slot-scope="{ row, $index }">
             <el-input
               v-if="isShow[$index]"
               v-model="row.LevelType"
-              placeholder="请输入内容"
+              :placeholder="$t('form.pleaseEnter')"
             ></el-input>
             <span v-if="!isShow[$index]">{{ row.LevelType }}</span>
           </template>
         </el-table-column>
-        <el-table-column prop="LevelCode" label="OEE参数"> </el-table-column>
-        <el-table-column prop="Description" label="OEE描述">
+        <el-table-column prop="LevelCode" :label="'OEE'+$t('tableText.parameter')"> </el-table-column>
+        <el-table-column prop="Description" :label="'OEE'+$t('tableText.description')">
           <template slot-scope="{ row, $index }">
             <el-input
               v-if="isShow[$index]"
               v-model="row.Description"
-              placeholder="请输入内容"
+              :placeholder="$t('form.pleaseEnter')"
             ></el-input>
             <span v-if="!isShow[$index]">{{ row.Description }}</span>
           </template>
         </el-table-column>
-        <el-table-column prop="ModifyDate" label="时间">
+        <el-table-column prop="ModifyDate" :label="$t('tableText.time1')">
           <template slot-scope="{ row }">
             <!-- <el-input
               v-if="isShow[$index]"
@@ -55,32 +63,37 @@
             <span>{{ getDate(row.ModifyDate) }}</span>
           </template>
         </el-table-column>
-        <el-table-column prop="Operator" label="操作员">
+        <el-table-column prop="Operator" :label="$t('form.maintainers')">
           <template slot-scope="{ row, $index }">
             <el-input
               v-if="isShow[$index]"
               v-model="row.Operator"
-              placeholder="请输入内容"
+              :placeholder="$t('form.pleaseEnter')"
             ></el-input>
             <span v-if="!isShow[$index]">{{ row.Operator }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="操作">
+        <el-table-column :label="$t('tableText.operate')">
           <template slot-scope="scope">
-            <el-button size="mini" @click="ChangeShow(scope.$index, scope.row)"
-              >编辑</el-button
-            >
             <el-button
+              type="primary"
+              icon="el-icon-edit"
               size="mini"
+              @click="ChangeShow(scope.$index, scope.row)"
+            ></el-button>
+            <el-button
               type="danger"
+              icon="el-icon-delete"
+              size="mini"
               @click="handleDelete(scope.$index, scope.row)"
-              >删除</el-button
-            >
+            ></el-button>
           </template>
         </el-table-column>
       </el-table>
       <el-pagination
-        style="margin-top: 20px"
+        background
+        align="center"
+        style="margin-top: 15px"
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
         :current-page="currentPage"
@@ -91,23 +104,23 @@
       </el-pagination>
     </el-card>
 
-    <el-dialog title="OE参数信息" :visible.sync="dialogFormVisible">
-      <el-form ref="form" label-width="80px">
-        <el-form-item label="OEE类型">
-          <el-select v-model="levelTypeInput" placeholder="请选择OEE类型">
-            <el-option label="计划" value="计划"></el-option>
-            <el-option label="工作" value="工作"></el-option>
-            <el-option label="停机" value="停机"></el-option>
-            <el-option label="其他" value="其他"></el-option>
+    <el-dialog :title="'OEE'+$t('tableText.parameter')" :visible.sync="dialogFormVisible">
+      <el-form ref="form" label-width="auto">
+        <el-form-item :label="'OEE'+$t('tableText.type')">
+          <el-select v-model="levelTypeInput" :placeholder="'OEE'+$t('tableText.type')">
+            <el-option :label="$t('tableText.plan')" value="计划"></el-option>
+            <el-option :label="$t('tableText.work')" value="工作"></el-option>
+            <el-option :label="$t('tableText.stop')" value="停机"></el-option>
+            <el-option :label="$t('tableText.other')" value="其他"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="OEE参数">
+        <el-form-item :label="'OEE'+$t('tableText.parameter')">
           <el-input v-model="levelCodeInput"></el-input>
         </el-form-item>
-        <el-form-item label="OEE描述">
+        <el-form-item :label="'OEE'+$t('tableText.description')">
           <el-input
             class="popul-item"
-            placeholder="请输入内容"
+            :placeholder="$t('form.pleaseEnter')"
             v-model="descriptionInput"
           >
           </el-input>
@@ -137,12 +150,12 @@
         </el-input>
       </div> -->
       <div slot="footer" class="dialog-footer">
-        <el-button @click="dialogFormVisible = false">取 消</el-button>
+        <el-button @click="dialogFormVisible = false">{{$t('form.cancel')}}</el-button>
         <el-button
           type="primary"
           @click="(dialogFormVisible = false), insertData()"
         >
-          确 定
+       {{$t('form.confirm')}}
         </el-button>
       </div>
     </el-dialog>
@@ -151,37 +164,37 @@
       <div>
         <el-input
           class="popul-item"
-          placeholder="请输入内容"
+        :placeholder="$t('form.pleaseEnter')"
           v-model="levelCodeChange"
           :disabled="true"
         >
-          <template slot="prepend">OE参数</template>
+          <template slot="prepend">{{'OEE'+$t('tableText.parameter')}}</template>
         </el-input>
         <el-input
           class="popul-item"
-          placeholder="请输入内容"
+         :placeholder="$t('form.pleaseEnter')"
           v-model="levelTypeChange"
         >
-          <template slot="prepend">OE类型</template>
+          <template slot="prepend">{{'OEE'+$t('tableText.type')}}</template>
         </el-input>
         <el-input
           class="popul-item"
-          placeholder="请输入内容"
+         :placeholder="$t('form.pleaseEnter')"
           v-model="descriptionChange"
         >
-          <template slot="prepend">OE描述</template>
+          <template slot="prepend">{{'OEE'+$t('tableText.description')}}</template>
         </el-input>
         <!-- <el-input placeholder="请输入内容" v-model="operatorChange">
           <template slot="prepend">操作员</template>
         </el-input> -->
       </div>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="OEChange = false">取 消</el-button>
+        <el-button @click="OEChange = false">{{$t('form.cancel')}}</el-button>
         <el-button
           type="primary"
           @click="(dialogFormVisible = false), handleUpdate()"
         >
-          确 定
+          {{$t('form.confirm')}}
         </el-button>
       </div>
     </el-dialog>
@@ -206,6 +219,7 @@ export default {
       currentPage: 1,
       pageSize: 10,
       total: 10,
+      tableHeight: 0,
       isShow: [],
       loading: null,
       levelCodeChange: "",
@@ -225,13 +239,18 @@ export default {
     };
   },
   beforeMount() {
-    this.dataInitialization();
+    // this.dataInitialization();
+    this.getScreenHeight();
   },
-  mounted() {},
+  mounted() {
+    window.addEventListener("resize", this.getScreenHeight);
+  },
+  beforeDestroy() {
+    window.removeEventListener("resize", this.getScreenHeight);
+  },
   methods: {
     //查询OE参数
     searchData() {
-      this.startLoading();
       XY_OEE_LevelCode({
         levelCode: this.searchiInput,
         operationType: "Q",
@@ -242,33 +261,31 @@ export default {
           } else if (res.data.Status === "NG") {
             this.tableData = [];
           }
-          this.endLoading();
         })
         .catch(() => {
           this.$message({
             type: "error",
             message: `网络不良`,
           });
-          this.endLoading();
         });
     },
     //添加一条数据
     async insertData() {
-        let haveCode = false;
+      let haveCode = false;
       await this.tableData.forEach((item) => {
-        if(item.LevelCode === this.levelCodeInput) {
-          haveCode = true
+        if (item.LevelCode === this.levelCodeInput) {
+          haveCode = true;
           this.$message({
             type: "error",
             message: `此参数已有,请输入新参数`,
           });
           return;
         }
-      })
-      if(haveCode) {
+      });
+      if (haveCode) {
         return;
-      };
-      this.startLoading();
+      }
+
       let date = this.getDateTo();
       XY_OEE_LevelCode({
         LevelCode: this.levelCodeInput,
@@ -291,25 +308,27 @@ export default {
             this.levelTypeInput = "";
             this.descriptionInput = "";
           }
-          this.endLoading();
         })
         .catch(() => {
           this.$message({
             type: "error",
             message: `网络不良`,
           });
-          this.endLoading();
         });
     },
     //分页
     handleSizeChange(val) {
-      console.log(`每页 ${val} 条`);
       this.currentPage = 1;
       this.pageSize = val;
     },
     handleCurrentChange(val) {
-      console.log(`当前页: ${val}`);
       this.currentPage = val;
+    },
+    getScreenHeight() {
+      this.$nextTick(() => {
+        this.tableHeight = window.innerHeight - 225;
+        //后面的50：根据需求空出的高度，自行调整
+      });
     },
     //初始化获取数据
     dataInitialization() {
@@ -441,23 +460,18 @@ export default {
       let todayHours = hours + ":" + min + ":" + second;
       return todayTime + " " + todayHours;
     },
-    startLoading() {
-      this.loading = this.$loading({
-        lock: true,
-        text: "加载中~",
-        spinner: "el-icon-loading",
-        background: "rgba(0, 0, 0, 0.2)", //调节透明度
-      });
-    },
-    endLoading() {
-      this.loading.close();
-    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
 .parameterSetting {
+  padding: 10px;
+  .header-css {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
   .input {
     width: 200px;
     margin-right: 10px;

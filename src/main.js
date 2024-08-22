@@ -19,7 +19,7 @@ import router from './router'
 
 import '@/icons' // icon
 import '@/permission' // permission control
-import {i18n} from './i18n/index.js'; 
+import { i18n } from './i18n/index.js';
 
 import AFTableColumn from 'af-table-column'
 Vue.use(AFTableColumn)
@@ -46,3 +46,4 @@ new Vue({
   store,
   render: h => h(App)
 })
+

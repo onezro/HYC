@@ -22,7 +22,9 @@ const zh = {
     orderProductStop: "锁定管控",
     parameterEnable: "参数启用",
     pcbonlineTime: "生命周期",
+    pcbTime: "标准CT",
     paramData:'管控参数维护',
+    makeupMenges: "漏补站管理",
     makeupStops: "漏站补站",
     deviceParam: "设备共享文件",
     featureSetting:'功能设置',
@@ -69,7 +71,7 @@ const zh = {
     rest:'重置',
     confirm: "确定",
     operate: "操作",
-    maintainers: "操作人",
+    maintainers: "操作员",
     //输入框
     pleaseEnter: "请输入",
     pleaseSelect: "请选择",
@@ -131,6 +133,10 @@ const zh = {
     code:'编码',
     cleanTime:'清洗时间',
     //
+    plan:'计划',
+    work:'工作',
+    stop:'停机',
+    other:'其他',
     //漏站补站
     missQueries:'漏站查询',
     MissReplacement:'缺失补站',
@@ -141,6 +147,8 @@ const zh = {
     input:'录入',
     writeRout:'写入工艺流程',
     registerTicket:'注册SN到工单',
+    //录入参数
+    time1:'时间',
     //CPK项目列表
     itemNumber:'ITEM号',
     productModel:'产品型号',
