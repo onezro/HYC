@@ -52,7 +52,8 @@ const zh = {
     calendars:'维保派工日历',
     abnormal:'异常维护表',
     Maintenance:'异常维护日历',
-    parameterSettings:'录入参数设定'
+    parameterSettings:'录入参数设定',
+    fct_yield:'FCT良率'
   },
   huanYingShiYong: "欢迎使用",
   form: {
@@ -82,6 +83,13 @@ const zh = {
     endions: "结束站位",
     enableAll: "全部启用",
     closeAll: "全部关闭",
+    WorkOrder:"工单",
+    ProductName:"产品",
+    OrderQTY:"工单需求量",
+    FCTPass:"FCT良品数量",
+    FCTFail:"FCT不良数量",
+    FCT1stYield:"FCT一次良率",
+    FCTYield:"FCT良率",
   },
   tableText: {
     account:'账号',

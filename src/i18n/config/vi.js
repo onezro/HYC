@@ -52,7 +52,8 @@ const vi = {
     calendars: "Lịch trình bảo trì",
     abnormal: "Bảng bảo trì bất thường",
     Maintenance: "Lịch bảo trì bất thường",
-    parameterSettings: "Cài đặt tham số nhập"
+    parameterSettings: "Cài đặt tham số nhập",
+    fct_yield: "FCT Sản lượng",
   },
   huanYingShiYong: "Chào mừng sử dụng",
   form: {
@@ -61,45 +62,52 @@ const vi = {
     menuName: "Tên menu",
     iconText: "Biểu tượng",
     component: "Đường dẫn thành phần",
-    componentName: 'Tên thành phần',
+    componentName: "Tên thành phần",
     path: "Đường dẫn",
     revise: "Sửa đổi",
     delete: "Xóa",
     add: "Thêm vào",
     inquire: "Truy vấn",
     cancel: "Hủy bỏ",
-    rest: 'Thiết lập lại',
+    rest: "Thiết lập lại",
     confirm: "Xác nhận",
     operate: "Hoạt động",
     maintainers: "Nhân viên vận hành",
-    // Hộp nhập  
+    // Hộp nhập
     pleaseEnter: "Vui lòng nhập",
     pleaseSelect: "Vui lòng chọn",
     productList: "Sản phẩm",
-    productNum: 'Số sản phẩm',
+    productNum: "Số sản phẩm",
     workOrder: "Số đơn công việc",
     stations: "Vị trí bắt đầu",
     endions: "Vị trí kết thúc",
     enableAll: "Kích hoạt tất cả",
     closeAll: "Đóng tất cả",
+    WorkOrder: "Đơn đặt công",
+    ProductName: "Tên sản phẩm",
+    OrderQTY: "Số lượng yêu cầu đơn đặt công",
+    FCTPass: "Số lượng sản phẩm tốt qua FCT",
+    FCTFail: "Số lượng sản phẩm không tốt qua FCT",
+    FCT1stYield: "Tỷ lệ sản phẩm tốt qua lần đầu tiên FCT",
+    FCTYield: "Tỷ lệ sản phẩm tốt qua FCT",
   },
   tableText: {
-    account: 'Tài khoản',
-    employee: 'Nhân viên',
-    role: 'Vai trò',
-    current: 'Hiện tại',
-    description: 'Mô tả',
+    account: "Tài khoản",
+    employee: "Nhân viên",
+    role: "Vai trò",
+    current: "Hiện tại",
+    description: "Mô tả",
     shutDown: "Đóng cửa",
-    menu: 'Menu',
-    directory: 'Thư mục',
-    parentMenu: 'Menu cha',
-    enable: 'Kích hoạt',
-    tempSnum: 'Số mẫu',
-    category: 'Loại',
-    stations: 'Vị trí đứng',
-    farewell: 'Mặt khác',
-    expirationDate: 'Ngày hết hạn',
-    process: 'Quy trình',
+    menu: "Menu",
+    directory: "Thư mục",
+    parentMenu: "Menu cha",
+    enable: "Kích hoạt",
+    tempSnum: "Số mẫu",
+    category: "Loại",
+    stations: "Vị trí đứng",
+    farewell: "Mặt khác",
+    expirationDate: "Ngày hết hạn",
+    process: "Quy trình",
     deviceType: "Loại thiết bị",
     device: "Thiết bị",
     sharedFolders: "Thư mục chia sẻ",
@@ -107,66 +115,65 @@ const vi = {
     password: "Mật khẩu",
     isEnabled: "Bật hay không",
     operate: "Hoạt động",
-    // Bắt buộc ngừng hoạt động  
+    // Bắt buộc ngừng hoạt động
     lineName: "Dây chuyền",
     updateTime: "Thời gian hoạt động",
     stopActive: "Trạng thái",
     history: "Lịch sử",
     user: "Nhân viên vận hành",
-    // Đơn hàng sản phẩm ngừng hoạt động  
+    // Đơn hàng sản phẩm ngừng hoạt động
     type: "Loại",
     product: "Sản phẩm",
     order: "Đơn hàng",
-    pcb: 'PCB',
-    // Vòng đời  
+    pcb: "PCB",
+    // Vòng đời
     time: "Thời gian (phút)",
-    // Quy trình Beat  
+    // Quy trình Beat
     delayTime: "Thời gian trì hoãn (phút)",
     regulation: "Quy định",
     greaterThan: "Lớn hơn",
     lessThan: "Nhỏ hơn",
 
-    // Kích hoạt tham số  
+    // Kích hoạt tham số
     device: "Thiết bị",
     parameter: "Tham số",
-    name: 'Tên',
-    code: 'Mã',
-    cleanTime: 'Thời gian làm sạch',
-    //  
-    plan: 'Kế hoạch',
-    work: 'Công việc',
-    stop: 'Tắt máy',
-    other: 'Khác',
-    // Trạm bù lỗ  
-    missQueries: 'Truy vấn trống trạm',
-    MissReplacement: 'Bù trạm thiếu',
-    startTime: 'Thời gian bắt đầu',
-    endTime: 'Thời gian kết thúc',
-    selectTime: 'Chọn ngày giờ',
-    badCode: 'Mã không tốt',
-    input: 'Nhập liệu',
-    writeRout: 'Ghi quy trình công nghệ',
-    registerTicket: 'Đăng ký SN vào đơn hàng',
-    // Nhập liệu tham số  
-    time1: 'Thời gian',
-    // Danh sách dự án CPK  
-    itemNumber: 'Số ITEM',
-    productModel: 'Mẫu sản phẩm',
-    points: 'Điểm',
-    attribute: 'Thuộc tính',
-    subgroupCapacity: 'Công suất nhóm con',
-    unit: 'Đơn vị',
-    standardValue: 'Giá trị chuẩn',
-    //yan  
+    name: "Tên",
+    code: "Mã",
+    cleanTime: "Thời gian làm sạch",
+    //
+    plan: "Kế hoạch",
+    work: "Công việc",
+    stop: "Tắt máy",
+    other: "Khác",
+    // Trạm bù lỗ
+    missQueries: "Truy vấn trống trạm",
+    MissReplacement: "Bù trạm thiếu",
+    startTime: "Thời gian bắt đầu",
+    endTime: "Thời gian kết thúc",
+    selectTime: "Chọn ngày giờ",
+    badCode: "Mã không tốt",
+    input: "Nhập liệu",
+    writeRout: "Ghi quy trình công nghệ",
+    registerTicket: "Đăng ký SN vào đơn hàng",
+    // Nhập liệu tham số
+    time1: "Thời gian",
+    // Danh sách dự án CPK
+    itemNumber: "Số ITEM",
+    productModel: "Mẫu sản phẩm",
+    points: "Điểm",
+    attribute: "Thuộc tính",
+    subgroupCapacity: "Công suất nhóm con",
+    unit: "Đơn vị",
+    standardValue: "Giá trị chuẩn",
+    //yan
   },
   message: {
-    success: ' thành công',
-    Cancel: "Hủy bỏ hoạt động"
+    success: " thành công",
+    Cancel: "Hủy bỏ hoạt động",
   },
   rules: {
-    error: "Nội dung không thể rỗng"
-  }
-}
-
+    error: "Nội dung không thể rỗng",
+  },
+};
 
 export default vi;

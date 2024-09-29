@@ -3,25 +3,13 @@
     <el-card shadow="always" :body-style="{ padding: '10px' }">
       <el-form :model="form" ref="form" :inline="true" size="normal">
         <el-form-item label="产品">
-          <el-select
+          <el-input
             v-model="form.productName"
-            filterable
-            placeholder="点击选择"
-          >
-            <el-option
-              v-for="item in itemList"
-              :key="item.PartNumber"
-              :label="item.PartNumber"
-              :value="item.PartNumber"
-            ></el-option>
-          </el-select>
+            placeholder="请输入"
+          ></el-input>
         </el-form-item>
         <el-form-item label="正反面">
-          <el-select
-            v-model="form.side"
-            filterable
-            placeholder="点击选择"
-          >
+          <el-select v-model="form.side" filterable placeholder="点击选择">
             <el-option
               v-for="item in pon"
               :key="item.value"
@@ -55,7 +43,16 @@
       >
         <el-table-column prop="ProductName" label="产品"> </el-table-column>
         <el-table-column prop="CycleTime" label="周期时间"> </el-table-column>
-        <el-table-column prop="Side" label="正反面" :filters="[{text:'Top',value:'Top'},{text:'Bot',value:'Bot'}]" :filter-method="filterMethod"> </el-table-column>
+        <el-table-column
+          prop="Side"
+          label="正反面"
+          :filters="[
+            { text: 'Top', value: 'Top' },
+            { text: 'Bot', value: 'Bot' },
+          ]"
+          :filter-method="filterMethod"
+        >
+        </el-table-column>
         <el-table-column prop="UserName" label="操作人"> </el-table-column>
         <el-table-column prop="UpdateTime" label="操作时间"> </el-table-column>
         <el-table-column fixed="right" label="操作" width="150" align="center">
@@ -125,7 +122,7 @@
 </template>
 
 <script>
-import { XYL_OEE_ProductCycle } from "@/api/all";
+import { OEE_Time_ProductCycleControl } from "@/api/all";
 import { getToken } from "@/utils/auth";
 export default {
   data() {
@@ -139,7 +136,7 @@ export default {
         userName: getToken(),
         productName: "",
         cycleTime: 0,
-        side:''
+        side: "",
       },
       itemList: [],
       dialogVisible: false,
@@ -148,14 +145,11 @@ export default {
         userName: getToken(),
         productName: "",
         cycleTime: 0,
-        side:''
+        side: "",
       },
       loading: null,
-      pon:[
-        {value:'Top'},
-        {value:'Bot'}
-      ],
-      test:''
+      pon: [{ value: "Top" }, { value: "Bot" }],
+      test: "",
     };
   },
   beforeMount() {
@@ -181,8 +175,8 @@ export default {
     },
     getAll() {
       this.startLoading();
-      XYL_OEE_ProductCycle({ operationType: "QA" })
-        .then(({ data }) => {
+      OEE_Time_ProductCycleControl({ operationType: "QA" })
+        .then((data) => {
           if (data.Status === "OK") {
             this.$message({
               message: "初始数据查询成功",
@@ -207,13 +201,15 @@ export default {
       });
     },
     addData() {
-      if (this.form.userName === '' ||
-      this.form.cycleTime === 0 ||
-      this.form.side === '') {
+      if (
+        this.form.userName === "" ||
+        this.form.cycleTime === 0 ||
+        this.form.side === ""
+      ) {
         return;
       }
-      XYL_OEE_ProductCycle({ ...this.form, operationType: "I" })
-        .then(({ data }) => {
+      OEE_Time_ProductCycleControl({ ...this.form, operationType: "I" })
+        .then((data) => {
           if (data.Status === "OK") {
             this.$message("增加成功");
             this.getNowData();
@@ -226,12 +222,12 @@ export default {
         });
     },
     changeData(index, row) {
-      XYL_OEE_ProductCycle({ ...this.changeForm, operationType: "U" })
-        .then(({ data }) => {
+      OEE_Time_ProductCycleControl({ ...this.changeForm, operationType: "U" })
+        .then((data) => {
           if (data.Status === "OK") {
             this.$message("修改成功");
             this.dialogVisible = !this.dialogVisible;
-            this.getNowData()
+            this.getNowData();
           } else {
             this.$message(data.Message);
           }
@@ -241,8 +237,8 @@ export default {
         });
     },
     getNowData() {
-      XYL_OEE_ProductCycle({ ...this.form, operationType: "Q" })
-        .then(({ data }) => {
+      OEE_Time_ProductCycleControl({ ...this.form, operationType: "Q" })
+        .then((data) => {
           if (data.Status === "OK") {
             this.delectShow = true;
             this.currentPage = 1;
@@ -257,12 +253,12 @@ export default {
         });
     },
     getHistoryData() {
-      if (this.form.productName === '') {
+      if (this.form.productName === "") {
         return;
       }
       this.delectShow = false;
-      XYL_OEE_ProductCycle({ ...this.form, operationType: "QH" })
-        .then(({ data }) => {
+      OEE_Time_ProductCycleControl({ ...this.form, operationType: "QH" })
+        .then((data) => {
           if (data.Status === "OK") {
             this.currentPage = 1;
             this.tableData = data.DataList;
@@ -284,8 +280,8 @@ export default {
       };
     },
     handleDelete(index, row) {
-      XYL_OEE_ProductCycle({ ...row, operationType: "D" })
-        .then(({ data }) => {
+      OEE_Time_ProductCycleControl({ ...row, operationType: "D" })
+        .then((data) => {
           if (data.Status === "OK") {
             this.$message("删除成功");
             if (this.delectShow) {
@@ -318,9 +314,9 @@ export default {
         this.loading.close();
       }
     },
-    filterMethod(value,row) {
-      return row.Side === value
-    }
+    filterMethod(value, row) {
+      return row.Side === value;
+    },
   },
 };
 </script>

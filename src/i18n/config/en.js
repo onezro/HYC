@@ -52,7 +52,8 @@ const en = {
     calendars: "Maintenance Scheduling Calendar",  
     abnormal: "Abnormal Maintenance Table",  
     Maintenance: "Abnormal Maintenance Calendar",  
-    parameterSettings: "Input Parameter Settings"  
+    parameterSettings: "Input Parameter Settings",
+    fct_yield:'FCTYield'
 },
   huanYingShiYong: "Welcome to use",
   form: {  
@@ -82,6 +83,13 @@ const en = {
     endions: "End Station",  
     enableAll: "Enable All",  
     closeAll: "Close All",  
+    WorkOrder:"Work Order",
+    ProductName:"Product Name",
+    OrderQTY:"Order Quantity",
+    FCTPass:"FCT Passed Quantity",
+    FCTFail:"FCT Failed Quantity",
+    FCT1stYield:"FCT First Pass Yield",
+    FCTYield:"FCT Yield",
 },  
 tableText: {  
     account: 'Account',  

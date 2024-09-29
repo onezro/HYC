@@ -202,7 +202,7 @@
 </template>
 
 <script>
-import { XY_OEE_LevelCode } from "@/api/all";
+import { XY_OEE_LevelCodeControl } from "@/api/all";
 import { getDate } from "@/utils/getDate";
 import { getToken } from "@/utils/auth";
 export default {
@@ -239,7 +239,7 @@ export default {
     };
   },
   beforeMount() {
-    // this.dataInitialization();
+    this.dataInitialization();
     this.getScreenHeight();
   },
   mounted() {
@@ -251,14 +251,14 @@ export default {
   methods: {
     //查询OE参数
     searchData() {
-      XY_OEE_LevelCode({
+      XY_OEE_LevelCodeControl({
         levelCode: this.searchiInput,
         operationType: "Q",
       })
         .then((res) => {
-          if (res.data.Status === "OK") {
-            this.tableData = res.data.DataList;
-          } else if (res.data.Status === "NG") {
+          if (res.Status === "OK") {
+            this.tableData = res.DataList;
+          } else if (res.Status === "NG") {
             this.tableData = [];
           }
         })
@@ -287,7 +287,7 @@ export default {
       }
 
       let date = this.getDateTo();
-      XY_OEE_LevelCode({
+      XY_OEE_LevelCodeControl({
         LevelCode: this.levelCodeInput,
         levelType: this.levelTypeInput,
         description: this.descriptionInput,
@@ -296,7 +296,7 @@ export default {
         operationType: "I",
       })
         .then((res) => {
-          if (res.data.Status === "OK") {
+          if (res.Status === "OK") {
             this.tableData.unshift({
               LevelCode: this.levelCodeInput,
               LevelType: this.levelTypeInput,
@@ -333,26 +333,26 @@ export default {
     //初始化获取数据
     dataInitialization() {
       // this.startLoading();
-      XY_OEE_LevelCode({
+      XY_OEE_LevelCodeControl({
         operationType: "QA",
       })
         .then((res) => {
-          if (res.data.Status === "OK") {
-            this.tableData = res.data.DataList;
+          if (res.Status === "OK") {
+            this.tableData = res.DataList;
           } else {
             this.$message({
               type: "error",
               message: `初始化失败!`,
             });
           }
-          this.endLoading();
+          // this.endLoading();
         })
-        .catch(() => {
+        .catch((err) => {
           this.$message({
             type: "error",
             message: `网络不良`,
           });
-          this.endLoading();
+          // this.endLoading();
         });
     },
     //新增信息
@@ -376,8 +376,8 @@ export default {
       this.OEChange = false;
     },
     handleUpdate() {
-      this.startLoading();
-      XY_OEE_LevelCode({
+      // this.startLoading();
+      XY_OEE_LevelCodeControl({
         levelCode: this.levelCodeChange,
         levelType: this.levelTypeChange,
         description: this.descriptionChange,
@@ -386,7 +386,7 @@ export default {
         operationType: "U",
       })
         .then((res) => {
-          if (res.data.Status === "OK") {
+          if (res.Status === "OK") {
             this.tableData[this.index] = {
               LevelCode: this.levelCodeChange,
               LevelType: this.levelTypeChange,
@@ -396,7 +396,7 @@ export default {
             };
           }
           this.OEChange = false;
-          this.endLoading();
+          // this.endLoading();
         })
         .catch(() => {
           this.$message({
@@ -404,30 +404,30 @@ export default {
             message: `网络不良`,
           });
           this.OEChange = false;
-          this.endLoading();
+          // this.endLoading();
         });
     },
     //删除数据
     handleDelete(index, row) {
-      this.startLoading();
-      XY_OEE_LevelCode({
+      // this.startLoading();
+      XY_OEE_LevelCodeControl({
         ...row,
         operationType: "D",
       })
         .then((res) => {
-          if (res.data.Status === "OK") {
+          if (res.Status === "OK") {
             this.tableData = this.tableData.filter((message, i) => {
               return index !== i;
             });
           }
-          this.endLoading();
+          // this.endLoading();
         })
         .catch(() => {
           this.$message({
             type: "error",
             message: `网络不良`,
           });
-          this.endLoading();
+          // this.endLoading();
         });
     },
     getDate(timestamp) {

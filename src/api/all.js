@@ -410,3 +410,27 @@ export function XY_OEE_LevelCodeControl(data) {
     data,
   });
 }
+
+export function XY_OEE_Calendar(data) {
+  return request({
+    url: "/XingYuAPI/XY_OEE_CalendarControl",
+    method: "post",
+    data,
+  });
+}
+
+export function OEE_Time_ProductCycleControl(data) {
+  return request({
+    url: "/XingYuAPI/OEE_Time_ProductCycle",
+    method: "post",
+    data,
+  });
+}
+
+export function Prod_FCTInquiry(data) {
+  return request({
+    url: "/XingYuAPI/Prod_FCTInquiry",
+    method: "post",
+    data,
+  });
+}

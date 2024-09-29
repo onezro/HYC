@@ -253,6 +253,12 @@ export const constantRoutes = [
         meta: { title: "router.smt_throwing" },
       },
       {
+        path: "FCT_yield",
+        name: "FCT_yield",
+        component: () => import("@/views/report/FCTYield"),
+        meta: { title: "router.fct_yield" },
+      },
+      {
         path: "smt_status",
         name: "smt_status",
         component: () => import("@/views/report/smt_status"),

@@ -228,7 +228,7 @@ export default {
     },
   },
   created() {
-    // this.getdata(0);
+    this.getdata(0);
     this.getLevelCode();
   },
   // mounted() {
@@ -308,9 +308,11 @@ export default {
       this.eventOrder = 2;
       this.startLoading();
       XY_OEE_Calendar({ operationType: "QA", lineNumber: "string" })
-        .then(async ({ data }) => {
-          console.log(data);
-          this.arr = [{ events: [] }, { events: [] }, { events: [] }];
+        .then(async (data) => {
+          if (!data) {
+            return;
+          }
+          this.arr = [{ events: [] }, { events: [] }, { events: [] }, { events: [] }, { events: [] }];
           let arr1 = data.DataList.sort(function (a, b) {
             let obj1 = a["StartTime"];
             let obj2 = b["StartTime"];
@@ -350,21 +352,27 @@ export default {
           }else if(line === 2) {
           this.line = 2;
           this.calendarOptions.eventSources = [this.arr[2]];
+          }else if(line === 3) {
+          this.line = 3;
+          this.calendarOptions.eventSources = [this.arr[3]];
+          }else if(line === 4) {
+          this.line = 4;
+          this.calendarOptions.eventSources = [this.arr[4]];
           }
           // this.line = this.lineHistory;
-          console.log(this.calendarOptions.eventSources);
+          console.log(this.arr);
           // this.calendarOptions.eventSources = this.arr;
           this.endLoading();
           // console.log(this.calendarOptions.eventSources);
           this.key++;
         })
         .catch((err) => {
-          // console.log(err);
+          console.log(err);
           // this.$message({
           //   type: "error",
           //   message: `网络不良`,
           // });
-          this.getdata(line);
+          // this.getdata(line);
         });
     },
     //初始化获取数据
@@ -377,8 +385,8 @@ export default {
           if (!res) {
             return;
           }
-          if (res.data.Status === "OK") {
-            this.levelCodeData = res.data.DataList;
+          if (res.Status === "OK") {
+            this.levelCodeData = res.DataList;
           } else {
             this.$message({
               type: "error",
@@ -399,13 +407,20 @@ export default {
         });
     },
     addData() {
+      // console.log(
+      //   this.operatorInput === "" ,
+      //   this.levelTypeInput === "" ,
+      //   this.levelCodeInput === "" ,
+      //   this.radio === 4 ,
+      //   this.dateInput === "" ,
+      //   this.lineInput === "",
+      //   this.repeatInput === 'Y' && this.dateRepectInput.length === 0,
+      //   this.repeatInput === 'N' && this.timeInput === ''
+      // );
       if (
-        this.dateRepectInput === [] ||
-        this.operatorInput === "" ||
         this.levelTypeInput === "" ||
         this.levelCodeInput === "" ||
         this.radio === 4 ||
-        this.dateInput === "" ||
         this.lineInput === ""
       ) {
         this.$message({
@@ -413,14 +428,29 @@ export default {
           message: `请完整输入信息或者有信息格式不正确`,
         });
         return;
+      };
+
+      if (this.repeatInput === 'Y' && this.dateRepectInput.length === 0) {
+        this.$message({
+          type: "error",
+          message: `请完整输入信息或者有信息格式不正确`,
+        });
+        return;
+      }else if(this.repeatInput === 'N' && this.dateInput === ''){
+        this.$message({
+          type: "error",
+          message: `请完整输入信息或者有信息格式不正确`,
+        });
+        return;
       }
+
       if (getMin(this.timeInput, this.durationInput) < 0) {
         this.$message({
           type: "error",
           message: `请选择正确时间段`,
         });
         return;
-      }
+      };
       // if (overDay(this.timeInput, this.durationInput)) {
       //   this.$message({
       //     type: "error",
@@ -455,8 +485,8 @@ export default {
       console.log(obj);
       XY_OEE_Calendar(obj)
         .then((res) => {
-          console.log(obj, res.data.Status);
-          if (res.data.Status === "OK") {
+          console.log(obj, res.Status);
+          if (res.Status === "OK") {
             this.getdata(this.line);
             this.addEventShow = false;
             this.clearInput();
@@ -486,7 +516,7 @@ export default {
         operationType: "D",
       })
         .then((res) => {
-          if (res.data.Status === "OK") {
+          if (res.Status === "OK") {
             this.getdata(this.line);
             // this.key++;
             this.clearChange();
@@ -582,7 +612,7 @@ export default {
         operationType: "U",
       })
         .then((res) => {
-          if (res.data.Status === "OK") {
+          if (res.Status === "OK") {
             this.getdata(this.line);
           } else {
             console.log(res);
@@ -622,7 +652,7 @@ export default {
       this.durationInput = 0;
       this.repeatInput = "N";
       this.nameInput = "";
-      this.dateInput = [];
+      this.dateInput = '';
       this.dateRepectInput = "";
       this.operatorInput = "";
       this.descriptionInput = "";
@@ -646,23 +676,35 @@ export default {
       }
     },
     arrChange(item, obj) {
-      if (item.LineNumber === "Line1") {
+      if (item.LineNumber === "S01") {
         if (item.Repeat === "Y") {
           this.repeatObj(item, obj, 0);
         } else {
           this.notRepeatObj(item, obj, 0);
         }
-      } else if (item.LineNumber === "Line2") {
+      } else if (item.LineNumber === "S02") {
         if (item.Repeat === "Y") {
           this.repeatObj(item, obj, 1);
         } else {
           this.notRepeatObj(item, obj, 1);
         }
-      } else if (item.LineNumber === "Line3") {
+      } else if (item.LineNumber === "S03") {
         if (item.Repeat === "Y") {
           this.repeatObj(item, obj, 2);
         } else {
           this.notRepeatObj(item, obj, 2);
+        }
+      } else if (item.LineNumber === "S04") {
+        if (item.Repeat === "Y") {
+          this.repeatObj(item, obj, 3);
+        } else {
+          this.notRepeatObj(item, obj, 3);
+        }
+      } else if (item.LineNumber === "S05") {
+        if (item.Repeat === "Y") {
+          this.repeatObj(item, obj, 4);
+        } else {
+          this.notRepeatObj(item, obj, 4);
         }
       } else if (item.LineNumber === "All") {
         if (item.Repeat === "Y") {
